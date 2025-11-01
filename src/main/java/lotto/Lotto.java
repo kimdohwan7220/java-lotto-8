@@ -9,7 +9,6 @@ import utils.ErrorMessage;
 public class Lotto {
     private final List<Integer> numbers;
 
-    private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
@@ -17,10 +16,6 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
-    }
-
-    public static int calculateLottoCount(int purchasePrice) {
-        return purchasePrice / LOTTO_PRICE;
     }
 
     public static Lotto generateRandomNumber() {
