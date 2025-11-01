@@ -7,24 +7,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.utils.ErrorMessage;
+import lotto.utils.LottoConstans;
 
 public class Lotto {
     private final List<Integer> numbers;
-
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
-    private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final int MIN = LottoConstans.LOTTO_MIN_NUMBER;
+    private static final int MAX = LottoConstans.LOTTO_MAX_NUMBER;
+    private static final int SIZE = LottoConstans.LOTTO_NUMBER_SIZE;
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        this.numbers = numbers;
+        this.numbers = new ArrayList<>(numbers);
     }
 
     public static Lotto generateRandomNumber() {
         List<Integer> numbers = Randoms.pickUniqueNumbersInRange(
-                LOTTO_MIN_NUMBER,
-                LOTTO_MAX_NUMBER,
-                LOTTO_NUMBER_COUNT
+                MIN,
+                MAX,
+                SIZE
         );
         return new Lotto(numbers);
     }
@@ -42,7 +42,7 @@ public class Lotto {
     }
 
     private void validateLottoNumberSize(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+        if (numbers.size() != SIZE) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_SIZE.getMessage());
         }
     }
@@ -65,6 +65,6 @@ public class Lotto {
 
     private boolean numbersOutOfRange(List<Integer> numbers) {
         return numbers.stream()
-                .anyMatch(n -> n < LOTTO_MIN_NUMBER || n > LOTTO_MAX_NUMBER);
+                .anyMatch(n -> n < MIN || n > MAX);
     }
 }
