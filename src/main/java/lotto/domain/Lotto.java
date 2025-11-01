@@ -4,6 +4,8 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import lotto.utils.ErrorMessage;
 
 public class Lotto {
@@ -28,11 +30,9 @@ public class Lotto {
     }
 
     public static List<Lotto> generateLottos(int count) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(generateRandomNumber());
-        }
-        return lottos;
+        return IntStream.range(0, count)
+                .mapToObj(i -> generateRandomNumber())
+                .collect(Collectors.toList());
     }
 
     private void validate(List<Integer> numbers) {
