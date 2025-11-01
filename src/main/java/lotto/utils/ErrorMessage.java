@@ -1,4 +1,4 @@
-package utils;
+package lotto.utils;
 
 public enum ErrorMessage {
     INVALID_LOTTO_NUMBER("[ERROR] 로또 번호는 1부터 45 사이여야 합니다."),

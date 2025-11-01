@@ -1,12 +1,11 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
-import utils.ErrorMessage;
+import lotto.utils.ErrorMessage;
 
-public class LottoPurchaseManager {
+public class LottoPurchase {
 
     private static final int LOTTO_PRICE = 1000;
-    private static final int MIN_PURCHASE_AMOUNT = 0;
 
     public static List<Lotto> buyLottos(int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
