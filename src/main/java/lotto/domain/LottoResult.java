@@ -45,11 +45,11 @@ public class LottoResult {
     }
 
     public double calculateProfitRate() {
-        int totalPrize = rankCounts.entrySet().stream()
-                .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
+        long totalPrize = rankCounts.entrySet().stream()
+                .mapToLong(entry -> entry.getKey().getPrize() * entry.getValue())
                 .sum();
 
-        int totalSpent = purchasedLottos.size() * LottoConstans.LOTTO_PRICE;
+        long totalSpent = purchasedLottos.size() * LottoConstans.LOTTO_PRICE;
         return ((double) totalPrize / totalSpent) * 100;
     }
 

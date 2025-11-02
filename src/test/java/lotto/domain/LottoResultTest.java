@@ -1,6 +1,6 @@
 package lotto.domain;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import java.text.DecimalFormat;
+import lotto.utils.LottoConstans;
 
 import java.util.List;
 import java.util.Map;
@@ -8,13 +8,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class LottoResultTest {
 
     private WinningLotto winningLotto;
 
     @BeforeEach
     void setUp() {
-        // 당첨 번호: 1,2,3,4,5,6 / 보너스: 7
         winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
     }
 
@@ -40,5 +41,27 @@ class LottoResultTest {
         assertThat(rankCounts.get(LottoRank.FOURTH)).isEqualTo(1);
         assertThat(rankCounts.get(LottoRank.FIFTH)).isEqualTo(1);
         assertThat(rankCounts.get(LottoRank.NONE)).isEqualTo(1);
+    }
+
+    @DisplayName("수익률 계산이 정상적으로 되는지 테스트")
+    @Test
+    void 수익률_테스트() {
+
+        List<Lotto> purchasedLottos = List.of(
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                new Lotto(List.of(1, 2, 3, 4, 5, 7)),
+                new Lotto(List.of(1, 2, 3, 4, 8, 9))
+        );
+
+        LottoResult lottoResult = new LottoResult(purchasedLottos, winningLotto);
+
+        double profitRate = lottoResult.calculateProfitRate();
+
+        DecimalFormat df = new DecimalFormat("#,###.0");
+        String formattedProfit = df.format(profitRate);
+
+        String expectedProfitRate = "67,668,333.3";
+
+        assertThat(formattedProfit).isEqualTo(expectedProfitRate);
     }
 }
