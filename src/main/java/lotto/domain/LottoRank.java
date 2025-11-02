@@ -20,6 +20,15 @@ public enum LottoRank {
         this.requiresBonus = requiresBonus;
     }
 
+    public static LottoRank findRank(int matchCount, boolean matchBonus) {
+        return Arrays.stream(LottoRank.values())
+                .filter(rank ->
+                        rank.matchCount == matchCount &&
+                                (rank.requiresBonus == matchBonus))
+                .findFirst()
+                .orElse(NONE);
+    }
+
     public int getPrize() {
         return prize;
     }
