@@ -4,6 +4,7 @@ import lotto.utils.LottoConstans;
 
 import java.util.List;
 import java.util.Map;
+import lotto.utils.LottoFormatter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -57,8 +58,7 @@ class LottoResultTest {
 
         double profitRate = lottoResult.calculateProfitRate();
 
-        DecimalFormat df = new DecimalFormat("#,###.0");
-        String formattedProfit = df.format(profitRate);
+        String formattedProfit = LottoFormatter.PROFIT_FORMAT.format(profitRate);
 
         String expectedProfitRate = "67,668,333.3";
 
