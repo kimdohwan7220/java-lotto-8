@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.utils.LottoConstans;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,9 @@ public class LottoResult {
         for(Lotto lotto : purchasedLottos) {
             int matchCount = countMatchNumbers(lotto);
             boolean matchBonus = containsBonus(lotto);
+
+            LottoRank rank = LottoRank.findRank(matchCount, matchBonus);
+            rankCounts.put(rank, rankCounts.get(rank) + 1);
         }
     }
 
@@ -39,4 +44,16 @@ public class LottoResult {
         return lotto.getNumbers().contains(winningLotto.getBonusNumber());
     }
 
+    public double calculateProfitRate() {
+        int totalPrize = rankCounts.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
+                .sum();
+
+        int totalSpent = purchasedLottos.size() * LottoConstans.LOTTO_PRICE;
+        return ((double) totalPrize / totalSpent) * 100;
+    }
+
+    public Map<LottoRank, Integer> getRankCounts() {
+        return rankCounts;
+    }
 }

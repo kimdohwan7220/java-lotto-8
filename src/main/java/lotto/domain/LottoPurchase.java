@@ -1,11 +1,11 @@
 package lotto.domain;
 
+import lotto.utils.LottoConstans;
+
 import java.util.List;
 import lotto.utils.ErrorMessage;
 
 public class LottoPurchase {
-
-    private static final int LOTTO_PRICE = 1000;
 
     public static List<Lotto> buyLottos(int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
@@ -19,19 +19,19 @@ public class LottoPurchase {
     }
 
     private static void validateUnit(int purchaseAmount) {
-        if (purchaseAmount % LOTTO_PRICE != 0) {
+        if (purchaseAmount % LottoConstans.LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_PURCHASE_AMOUNT.getMessage());
         }
     }
 
     private static void validateEnoughPurchaseAmount(int purchaseAmount) {
-        if (purchaseAmount < LOTTO_PRICE) {
+        if (purchaseAmount < LottoConstans.LOTTO_PRICE) {
             throw new IllegalArgumentException(ErrorMessage.NOT_ENOUGH_MONEY.getMessage());
         }
     }
 
     private static int calculateLottoCount(int purchaseAmount) {
-        return purchaseAmount / LOTTO_PRICE;
+        return purchaseAmount / LottoConstans.LOTTO_PRICE;
     }
 }
 
