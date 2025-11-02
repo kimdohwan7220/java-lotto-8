@@ -4,8 +4,10 @@ public enum ViewMessage {
     PURCHASE_AMOUNT_INPUT("구입금액을 입력해 주세요."),
     WINNING_NUMBER_INPUT("당첨 번호를 입력해 주세요."),
     BONUS_NUMBER_INPUT("보너스 번호를 입력해 주세요."),
-    LOTTO_RESULT_HEADER("당첨 통계"),
-    LOTTO_RESULT_MESSAGE("총 수익률은 ... 입니다.");
+    RESULT_OUTPUT("당첨 통계"),
+    PURCHASE_COUNT_OUTPUT("%d개를 구매했습니다."),
+    PROFITRATE_OUTPUT("총 수익률은 %s%%입니다.");
+
 
     private final String message;
 
