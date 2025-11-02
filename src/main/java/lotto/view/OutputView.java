@@ -1,4 +1,4 @@
 package lotto.view;
 
-public class Outputview {
+public class OutputView {
 }
