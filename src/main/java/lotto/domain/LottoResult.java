@@ -13,11 +13,19 @@ public class LottoResult {
         this.purchasedLottos = purchasedLottos;
         this.winningLotto = winningLotto;
         initRankCounts();
+        calculateResults();
     }
 
     private void calculateResults() {
         for(Lotto lotto : purchasedLottos) {
             int matchCount = countMatchNumbers(lotto);
+            boolean matchBonus = containsBonus(lotto);
+        }
+    }
+
+    private void initRankCounts() {
+        for(LottoRank rank : LottoRank.values()) {
+            rankCounts.put(rank, 0);
         }
     }
 
@@ -27,9 +35,8 @@ public class LottoResult {
                 .count();
     }
 
-    private void initRankCounts() {
-        for(LottoRank rank : LottoRank.values()) {
-            rankCounts.put(rank, 0);
-        }
+    private boolean containsBonus(Lotto lotto) {
+        return lotto.getNumbers().contains(winningLotto.getBonusNumber());
     }
+
 }
