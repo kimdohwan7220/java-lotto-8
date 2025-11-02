@@ -67,4 +67,8 @@ public class Lotto {
         return numbers.stream()
                 .anyMatch(n -> n < MIN || n > MAX);
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }
