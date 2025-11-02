@@ -27,5 +27,9 @@ class WinningLottoTest {
         assertThatThrownBy(() -> new WinningLotto(winningNumbers, 46))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.INVALID_LOTTO_NUMBER.getMessage());
+
+        assertThatThrownBy(() -> new WinningLotto(winningNumbers, 0))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.INVALID_LOTTO_NUMBER.getMessage());
     }
 }
