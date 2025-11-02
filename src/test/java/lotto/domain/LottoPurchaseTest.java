@@ -1,11 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 import java.util.List;
-import lotto.domain.Lotto;
-import lotto.domain.LottoPurchase;
 import lotto.utils.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,4 +31,6 @@ class LottoPurchaseTest {
         List<Lotto> lottos = LottoPurchase.buyLottos(3000);
         assertThat(lottos).hasSize(3);
     }
+
+
 }
