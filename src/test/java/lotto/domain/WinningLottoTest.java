@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import lotto.utils.ErrorMessage;
@@ -31,5 +32,17 @@ class WinningLottoTest {
         assertThatThrownBy(() -> new WinningLotto(winningNumbers, 0))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.INVALID_LOTTO_NUMBER.getMessage());
+    }
+
+    @DisplayName("정상적인 당첨 번호와 보너스 번호 입력 시 객체 생성")
+    @Test
+    void 정상_객체_생성() {
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
+
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+
+        assertThat(winningLotto.getWinningNumbers().getNumbers()).containsExactlyElementsOf(winningNumbers);
+        assertThat(winningLotto.getBonusNumber()).isEqualTo(bonusNumber);
     }
 }
