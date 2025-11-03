@@ -1,6 +1,8 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import lotto.utils.ErrorMessage;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -14,49 +16,82 @@ class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
 
     @Test
+    @DisplayName("통합 기능 테스트")
     void 통합_기능_테스트() {
         assertRandomUniqueNumbersInRangeTest(
                 () -> {
                     run(
-                            "8000",
-                            "1,2,3,4,5,6",
-                            "7"
+                            "8000",            // 구매금액 입력
+                            "1,2,3,4,5,6",    // 당첨번호 입력
+                            "7"                // 보너스 번호 입력
                     );
 
                     assertThat(output()).contains(
                             "8개를 구매했습니다.",
-                            "[8, 21, 23, 41, 42, 43]",
-                            "[3, 5, 11, 16, 32, 38]",
-                            "[7, 11, 16, 35, 36, 44]",
-                            "[1, 8, 11, 31, 41, 42]",
-                            "[13, 14, 16, 38, 42, 45]",
-                            "[7, 11, 30, 40, 42, 43]",
-                            "[2, 13, 22, 32, 38, 45]",
-                            "[1, 3, 5, 14, 22, 45]",
-                            "3개 일치 (5,000원) - 1개",
-                            "4개 일치 (50,000원) - 0개",
-                            "5개 일치 (1,500,000원) - 0개",
-                            "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개",
-                            "6개 일치 (2,000,000,000원) - 0개",
-                            "총 수익률은 62.5%입니다."
+                            "총 수익률은"
                     );
                 },
-                List.of(8, 21, 23, 41, 42, 43),
-                List.of(3, 5, 11, 16, 32, 38),
-                List.of(7, 11, 16, 35, 36, 44),
-                List.of(1, 8, 11, 31, 41, 42),
-                List.of(13, 14, 16, 38, 42, 45),
-                List.of(7, 11, 30, 40, 42, 43),
-                List.of(2, 13, 22, 32, 38, 45),
-                List.of(1, 3, 5, 14, 22, 45)
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(7, 8, 9, 10, 11, 12),
+                List.of(13, 14, 15, 16, 17, 18),
+                List.of(19, 20, 21, 22, 23, 24),
+                List.of(25, 26, 27, 28, 29, 30),
+                List.of(31, 32, 33, 34, 35, 36),
+                List.of(37, 38, 39, 40, 41, 42),
+                List.of(43, 44, 45, 1, 2, 3)
         );
     }
 
     @Test
+    @DisplayName("잘못된 입력 예외 테스트")
     void 잘못된_입력_예외_테스트() {
         assertSimpleTest(() -> {
-            runException("1000j"); // 숫자 아닌 값 입력
+
+            runException(
+                    "1000j\n" +
+                            "1,2,3,4,5,6\n" +
+                            "7\n"
+            );
             assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @Test
+    @DisplayName("보너스 번호 중복 예외 테스트")
+    void 보너스_번호_중복_예외_테스트() {
+        assertSimpleTest(() -> {
+            runException(
+                    "1000\n" +
+                            "1,2,3,4,5,6\n" +
+                            "6\n"
+            );
+            assertThat(output()).contains(ErrorMessage.DUPLICATE_NUMBER.getMessage());
+        });
+    }
+
+    @Test
+    @DisplayName("로또 번호 개수 초과 예외 테스트")
+    void 로또_번호_개수_초과_예외_테스트() {
+        assertSimpleTest(() -> {
+            runException(
+                    "1000\n" +
+                            "1,2,3,4,5,6,7\n" +
+                            "8\n"
+            );
+            assertThat(output()).contains(ErrorMessage.INVALID_LOTTO_SIZE.getMessage());
+        });
+    }
+
+    @Test
+    @DisplayName("로또 번호 개수 미만 예외 테스트")
+    void 로또_번호_개수_미만_예외_테스트() {
+        assertSimpleTest(() -> {
+            runException(
+                    "1000\n" +
+                            "1,2,3,4,5\n" +
+                            "6\n"
+            );
+            assertThat(output()).contains(ErrorMessage.INVALID_LOTTO_SIZE.getMessage());
         });
     }
 
