@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
@@ -11,6 +12,7 @@ import lotto.utils.ViewMessage;
 public class OutputView {
 
     public static void printPurchasedLottos(List<Lotto> purchasedLottos) {
+        System.out.println();
         printPurchaseCount(purchasedLottos.size());
         printLottoNumbers(purchasedLottos);
     }
@@ -33,15 +35,16 @@ public class OutputView {
     }
 
     private static void printResultHeader() {
+        System.out.println();
         System.out.println(ViewMessage.RESULT_OUTPUT.getMessage());
         System.out.println(ViewMessage.RESULT_SEPARATOR.getMessage());
     }
 
     private static void printRankStatistics(Map<LottoRank, Integer> rankCounts) {
-        for (LottoRank rank : LottoRank.values()) {
-            if (rank == LottoRank.NONE) continue;
-            System.out.println(formatRankStatus(rank, rankCounts.get(rank)));
-        }
+        Arrays.stream(LottoRank.values())
+                .filter(rank -> rank != LottoRank.NONE)
+                .sorted((a, b) -> Integer.compare(a.getMatchCount(), b.getMatchCount()))
+                .forEach(rank -> System.out.println(formatRankStatus(rank, rankCounts.get(rank))));
     }
 
     private static String formatRankStatus(LottoRank rank, int count) {
