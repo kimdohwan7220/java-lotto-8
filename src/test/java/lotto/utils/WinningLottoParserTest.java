@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class WinningLottoParserTest {
 
-    @DisplayName("정상 입력 문자열을 List<Integer>로 변환")
+    @DisplayName("정상 입력 문자열을 라스트로 변환")
     @Test
     void 정상_입력_파싱() {
         String input = "1,2,3,4,5,6";
