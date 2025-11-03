@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.utils.ErrorMessage;
-import lotto.utils.LottoConstans;
+import lotto.utils.LottoConstants;
 
 public class Lotto {
     private final List<Integer> numbers;
-    private static final int MIN = LottoConstans.LOTTO_MIN_NUMBER;
-    private static final int MAX = LottoConstans.LOTTO_MAX_NUMBER;
-    private static final int SIZE = LottoConstans.LOTTO_NUMBER_SIZE;
+    private static final int MIN = LottoConstants.LOTTO_MIN_NUMBER;
+    private static final int MAX = LottoConstants.LOTTO_MAX_NUMBER;
+    private static final int SIZE = LottoConstants.LOTTO_NUMBER_SIZE;
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);

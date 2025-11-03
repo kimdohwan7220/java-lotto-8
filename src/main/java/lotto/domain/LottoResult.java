@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.utils.LottoConstans;
+import lotto.utils.LottoConstants;
 
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +49,7 @@ public class LottoResult {
                 .mapToLong(entry -> entry.getKey().getPrize() * entry.getValue())
                 .sum();
 
-        long totalSpent = purchasedLottos.size() * LottoConstans.LOTTO_PRICE;
+        long totalSpent = purchasedLottos.size() * LottoConstants.LOTTO_PRICE;
         return ((double) totalPrize / totalSpent) * 100;
     }
 

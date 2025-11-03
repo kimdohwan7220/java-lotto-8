@@ -1,6 +1,4 @@
 package lotto.domain;
-import java.text.DecimalFormat;
-import lotto.utils.LottoConstans;
 
 import java.util.List;
 import java.util.Map;

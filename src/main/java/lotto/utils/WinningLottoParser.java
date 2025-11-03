@@ -1,9 +1,6 @@
 package lotto.utils;
 
-import static lotto.utils.LottoConstans.SPLIT_SEPARATOR;
-
-import lotto.utils.ErrorMessage;
-import lotto.utils.WinningLottoParser;
+import static lotto.utils.LottoConstants.SPLIT_SEPARATOR;
 
 import java.util.Arrays;
 import java.util.List;

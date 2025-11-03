@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import lotto.utils.ErrorMessage;
-import lotto.utils.LottoConstans;
+import lotto.utils.LottoConstants;
 
 public class WinningLotto {
     private final Lotto winningNumbers; // 6개의 당첨 번호
@@ -26,7 +26,7 @@ public class WinningLotto {
     }
 
     private void validateBonusNumberRange(int bonusNumber) {
-        if (bonusNumber < LottoConstans.LOTTO_MIN_NUMBER || bonusNumber > LottoConstans.LOTTO_MAX_NUMBER) {
+        if (bonusNumber < LottoConstants.LOTTO_MIN_NUMBER || bonusNumber > LottoConstants.LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER.getMessage());
         }
     }
