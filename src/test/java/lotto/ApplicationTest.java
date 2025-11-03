@@ -18,9 +18,9 @@ class ApplicationTest extends NsTest {
         assertRandomUniqueNumbersInRangeTest(
                 () -> {
                     run(
-                            "8000",                 // 구입 금액
-                            "1,2,3,4,5,6",          // 당첨 번호
-                            "7"                     // 보너스 번호
+                            "8000",
+                            "1,2,3,4,5,6",
+                            "7"
                     );
 
                     assertThat(output()).contains(

@@ -24,7 +24,10 @@ public class OutputView {
 
     private static void printLottoNumbers(List<Lotto> purchasedLottos) {
         for (Lotto lotto : purchasedLottos) {
-            System.out.println(lotto.getNumbers());
+            List<Integer> sortedNumbers = lotto.getNumbers().stream()
+                    .sorted()
+                    .toList();
+            System.out.println(sortedNumbers);
         }
     }
 
