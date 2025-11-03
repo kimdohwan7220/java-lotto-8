@@ -1,6 +1,9 @@
 package lotto.utils;
 
+import static lotto.utils.LottoConstans.SPLIT_SEPARATOR;
+
 import lotto.utils.ErrorMessage;
+import lotto.utils.WinningLottoParser;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +14,7 @@ public class WinningLottoParser {
         validateNotBlank(input);
 
         try {
-            return Arrays.stream(input.split(","))
+            return Arrays.stream(input.split(String.valueOf(SPLIT_SEPARATOR)))
                     .map(String::trim)
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
